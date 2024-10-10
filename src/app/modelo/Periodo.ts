@@ -14,4 +14,5 @@ export class Periodo {
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
     }
+
 }

@@ -1,69 +1,68 @@
 import { Component, OnInit } from '@angular/core';
-import { response } from 'express';
-import { Periodo } from 'src/app/modelo/Periodo';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PeriodoService } from 'src/app/servicios/periodo.service';
 
 @Component({
   selector: 'app-periodo',
   templateUrl: './periodo.component.html',
-  styleUrls: ['./periodo.component.scss']
 })
-export class PeriodoComponent implements OnInit{
+export class PeriodoComponent implements OnInit {
+  periodos: any[] = [];
+  periodoForm: FormGroup;
+  mensaje: string = '';
+  mensajeTipo: 'exito' | 'error' = 'exito';
+  mostrarPeriodo: boolean = true;
 
-  mensajeError: string = '';
-  public periodo: Periodo[] = this.peri.semestrePeriodo
-  newPeriodo: Periodo = new Periodo(0, 0, false, '', new Date(), new Date());
-
-  constructor(private peri: PeriodoService){}
+  constructor(private periodoService: PeriodoService, private fb: FormBuilder) {
+    this.periodoForm = this.fb.group({
+      anio: ['', [Validators.required, Validators.min(1900), Validators.max(new Date().getFullYear())]],
+      descripcion: ['', [Validators.required, Validators.maxLength(255)]],
+      estado: ['', [Validators.required]],
+      fecha_inicio: ['', Validators.required],
+      fecha_fin: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
-    this.listarPeriodo();
+    this.obtenerPeriodos();
   }
 
-  listarPeriodo(): void {
-    this.peri.obtenerSemestre().subscribe(
-      (data) => {
-        this.periodo = data;
-        console.log('Actividades disponibles: ', this.periodo);
-      },
-      (error) => {
-        console.error('Error al obtener actividades:', error);
-      }
-    );
+  obtenerPeriodos(): void {
+    this.periodoService.obtenerPeriodos().subscribe((data: any[]) => {
+      this.periodos = data;
+    }, (error: any) => {
+      this.mostrarMensaje('Error al obtener períodos', 'error');
+    });
   }
 
-  crearSemestre(): void {
-    const yearPattern = /^\d{4}$/;
-
-    if(!yearPattern.test(this.newPeriodo.anio.toString())){
-      this.mensajeError = 'Porfavor ingrese un año valido';
-      return;
+  agregarPeriodo(): void {
+    if (this.periodoForm.valid) {
+      this.periodoService.agregarPeriodo(this.periodoForm.value).subscribe(() => {
+        this.mostrarMensaje('Período agregado con éxito', 'exito');
+        this.obtenerPeriodos();
+        this.periodoForm.reset();
+      }, (error: any) => {
+        this.mostrarMensaje('Error al agregar período', 'error');
+      });
+    } else {
+      this.mostrarMensaje('Por favor, completa el formulario correctamente', 'error');
     }
+  }
 
-    if (!this.newPeriodo.anio ||
-        !this.newPeriodo.denominacion ||
-        !this.newPeriodo.fechaInicial ||
-        !this.newPeriodo.fechaFinal){
-          this.mensajeError = 'Por favor, Complete todo los campos ;b';
-          return;
-        }
+  eliminarPeriodo(id: number): void {
+    this.periodoService.eliminarPeriodo(id).subscribe(() => {
+      this.mostrarMensaje('Período eliminado con éxito', 'exito');
+      this.obtenerPeriodos();
+    }, (error: any) => {
+      this.mostrarMensaje('Error al eliminar período', 'error');
+    });
+  }
 
-      // Limpia el mensaje de error si todos los campos están llenos
-      this.mensajeError = '';
-
-      const ultimoId = this.periodo.length > 0 ? Math.max(...this.periodo.map(p => p.id)) : 0;
-      this.newPeriodo.id = ultimoId + 1;
-
-      this.peri.crearSemestre(this.newPeriodo).subscribe(
-        (response) => {
-          console.log('Semestre Creado: ', response);
-          this.listarPeriodo();
-          this.newPeriodo = new Periodo(0, 0, false, '', new Date(), new Date());
-        },
-        (error) => {
-          console.error('Error al crear el Periodo: ', error);
-          this.mensajeError = 'Ocurrio un error al crear el semestre. Intentelo otra vez';
-        }
-      );
+  mostrarMensaje(mensaje: string, tipo: 'exito' | 'error'): void {
+    this.mensaje = mensaje;
+    this.mensajeTipo = tipo;
+    setTimeout(() => {
+      this.mensaje = ''; // Desaparece el mensaje después de 5 segundos
+    }, 5000);
   }
 }

@@ -31,24 +31,4 @@ export class GUIDirectorComponent implements OnInit{
     this.mostrarArea = false;
   }
 
-  mostrarComponenteProgramas() {
-    this.mostrarPeriodo = false;
-    this.mostrarPrograma = true;
-    this.mostrarCoordinador = false;
-    this.mostrarArea = false;
-  }
-
-  mostrarComponenteCoordinador() {
-    this.mostrarPeriodo = false;
-    this.mostrarPrograma = false;
-    this.mostrarCoordinador = true;
-    this.mostrarArea = false;
-  }
-
-  mostrarComponenteArea() {
-    this.mostrarPeriodo = false;
-    this.mostrarPrograma = false;
-    this.mostrarCoordinador = false;
-    this.mostrarArea = true;
-  }
 }

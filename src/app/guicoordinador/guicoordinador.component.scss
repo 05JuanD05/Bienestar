@@ -1,3 +1,23 @@
+/*
+.contcoordinador {  display: grid;
+    grid-template-columns: 213px 1.8fr;
+    grid-template-rows: 70px 2.8fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    align-content: center;
+    grid-template-areas:
+      "ptop ptop"
+      "pmenu contenido";
+  }
+  
+  .contenido { grid-area: contenido; }
+  
+  .pmenu { grid-area: pmenu; }
+  
+  .ptop { grid-area: ptop; }
+*/
+
 .left{
   height: 100vh;
 }
@@ -51,12 +71,12 @@
 .user-avatar1 {
   width: 155px;
   height: 130px;
-
+  
 }
 
 
 .sesion{
-  display: block;
+  display: block; 
   margin-top: 0px;
   margin-left: 0px;
   margin-right: 0px;

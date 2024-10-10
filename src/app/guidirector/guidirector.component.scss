@@ -8,6 +8,29 @@
   height: 100%;
 }
 
+.contenido {
+  height: 100%;
+}
+
+.btn1 {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  background-color: transparent;
+  color: antiquewhite;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none; /* Si se trata de un enlace */
+}
+
+.btn1:hover {
+  background-color: #0056b3;
+}
+
+
 .user-container {
   position: relative;
   width: 100%;
@@ -28,10 +51,12 @@
 .user-avatar1 {
   width: 155px;
   height: 130px;
+  
 }
 
+
 .sesion{
-  display: block;
+  display: block; 
   margin-top: 0px;
   margin-left: 0px;
   margin-right: 0px;
@@ -54,8 +79,4 @@ a {
   color: white;
   border-radius: 5px;
   transition: background-color 0.3s;
-}
-
-.enter {
-  margin: 40px 0;
 }

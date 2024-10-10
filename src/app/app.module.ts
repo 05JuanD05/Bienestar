@@ -34,10 +34,18 @@ import { GUIInstructorComponent } from './guiinstructor/guiinstructor.component'
 import { IPrincipalComponent } from './iprincipal/iprincipal.component';
 import { PInicioComponent } from './pinicio/pinicio.component';
 import { InformadorComponent } from './utilidades/informador/informador.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { PeriodoService } from './servicios/periodo.service';
+
+
+
+
 
 
 @NgModule({
   declarations: [
+
+    PeriodoComponent, 
     AppComponent,
     IPrincipalComponent,
     GUICoordinadorComponent,
@@ -46,7 +54,6 @@ import { InformadorComponent } from './utilidades/informador/informador.componen
     GUIDirectorComponent,
     PInicioComponent,
     ActividadComponent,
-    PeriodoComponent,
     AreaComponent,
     EscenarioComponent,
     ProgramaComponent,
@@ -70,13 +77,15 @@ import { InformadorComponent } from './utilidades/informador/informador.componen
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     FileSaverModule,
     HttpClientModule,ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    MatDialogModule
-
+    MatDialogModule,
+    
+    
   ],
-  providers: [DisciplinaComponent,InformadorComponent],
+  providers: [DisciplinaComponent,InformadorComponent,PeriodoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

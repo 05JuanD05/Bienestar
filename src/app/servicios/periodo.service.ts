@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Periodo } from '../modelo/Periodo';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -7,17 +6,19 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PeriodoService {
+  private apiUrl = 'http://localhost:3000/periodos';
 
-  semestrePeriodo : Periodo[] = [];
-  private UrlApi = 'http://localhost:3000/periodo';
+  constructor(private http: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) { }
-
-  obtenerSemestre(): Observable<any[]> {
-    return this.httpClient.get<any[]>(this.UrlApi);
+  obtenerPeriodos(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/periodos`);
   }
 
-  crearSemestre(actividad: Periodo): Observable<any>  {
-    return this.httpClient.post(this.UrlApi, actividad);
+  agregarPeriodo(periodo: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/periodos`, periodo);
+  }
+
+  eliminarPeriodo(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/periodos/${id}`);
   }
 }

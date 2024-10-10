@@ -1,24 +1,77 @@
-.cform {
-  max-width: 600px; /* Limitar el ancho máximo del formulario */
-  margin: auto; /* Centrar el formulario horizontalmente */
-  padding: 20px; /* Espaciado interno */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+/* Estilos básicos para el componente periodo.component.css */
+
+/* Estilo general para el formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-control,
-.form-select {
-  font-size: 14px; /* Tamaño de fuente más pequeño */
-  padding: 10px; /* Ajustar el padding para hacer los campos más compactos */
-  margin-bottom: 10px; /* Espaciado entre campos */
+/* Estilos para las etiquetas */
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
-h4 {
-  font-size: 18px; /* Tamaño de fuente del título */
-  margin-bottom: 20px; /* Espaciado inferior del título */
+/* Estilos para los inputs */
+input, select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.btn {
-  padding: 8px 15px; /* Ajustar el tamaño del botón */
-  font-size: 14px; /* Tamaño de fuente del botón */
+input:focus, select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Botón de envío */
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para los mensajes de error */
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+}
+
+/* Estilos para el mensaje de éxito */
+.success-message {
+  color: green;
+  font-size: 0.9rem;
+}
+
+/* Estilos responsivos para pantallas más pequeñas */
+@media (max-width: 600px) {
+  form {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  button {
+    width: 100%;
+  }
 }

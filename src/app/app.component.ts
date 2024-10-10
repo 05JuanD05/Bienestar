@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Bienestar';
+  mostrarPeriodo: boolean = true; // Asegúrate de que esté en true para mostrar el componente
+  
+  
 }

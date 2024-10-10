@@ -43,4 +43,6 @@ export class Usuario {
         }
         return valido;
     }
-  }
+
+
+} 
